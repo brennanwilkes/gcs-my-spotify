@@ -1,0 +1,95 @@
+:root {
+	--polaroid-bg: #FFF;
+	--polaroid-border: 2px 2px 7px 1px #000000D0;
+	--polaroid-shine: radial-gradient(ellipse at 40px 10px , #ffffff30 0%, #ffffff40 15%, #00000020 100%);
+	--polaroid-hover-delete: #40000060;
+	--polaroid-hover-select: #00204060;
+	--polaroid-selected: #00204090;
+}
+
+.songPolaroid {
+	width: 100%;
+	padding-top: 122.5%;
+	position: relative;
+	background-color: var(--polaroid-bg);
+	border-radius: 2%;
+	z-index: 0;
+	-webkit-box-shadow: var(--polaroid-border);
+	-moz-box-shadow: var(--polaroid-border);
+	box-shadow: var(--polaroid-border);
+}
+
+
+.songPolaroidHoverable::before{
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: none;
+	transition: background 0.1s linear;
+	border-radius: 2%;
+}
+
+.songPolaroidHoverable:hover, .songPolaroidHoverable *:hover{
+	cursor: pointer;
+}
+
+.songPolaroidDeletable:hover::before{
+	background: var(--polaroid-hover-delete);
+}
+
+.songPolaroidSelectable:hover::before{
+	background: var(--polaroid-hover-select);
+}
+
+.songPolaroidSelected{
+	background: var(--polaroid-selected);
+}
+
+.songPolaroid > div {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.songPolaroid img {
+	border-radius: 2%;
+	height: auto;
+	width: 100%;
+	position: relative;
+	z-index: -1;
+	-webkit-box-shadow: var(--polaroid-border);
+	-moz-box-shadow: var(--polaroid-border);
+	box-shadow: var(--polaroid-border);
+}
+
+.songPolaroid > div > div:first-of-type {
+	border-radius: 2%;
+	background-image: var(--polaroid-shine);
+	width: 80%;
+	margin: 10%;
+	margin-bottom: 0;
+}
+
+.songPolaroid > div > div:last-of-type {
+	display: flex;
+	height: 26.25%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.songPolaroid h5, .songPolaroid h4 {
+	text-align: center;
+}
+
+.songPolaroid h5 {
+	color: #444;
+}

@@ -1,0 +1,32 @@
+@import "./brand";
+
+$custom-colors: (
+  "gcs-base": $gcs-base,
+  "gcs-elevated": $gcs-elevated,
+  "gcs-alpine": $gcs-alpine,
+  "gcs-bright": $gcs-bright,
+  "gcs-faded": $gcs-faded,
+  "gcs-loud": $gcs-loud
+);
+$theme-colors: $custom-colors;
+
+@import "../../node_modules/bootstrap-scss/bootstrap";
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+
+body{
+	background-color: $gcs-base
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	-ms-overflow-style: none;  /* Internet Explorer 10+ */
+	scrollbar-width: none;  /* Firefox */
+}
+body::-webkit-scrollbar {
+	display: none;  /* Safari and Chrome */
+}
