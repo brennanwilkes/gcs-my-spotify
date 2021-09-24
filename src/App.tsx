@@ -3,7 +3,7 @@ import "./app.scss";
 import "./scss/index.scss";
 import {HrWrapper} from "./HrWrapper/HrWrapper";
 import {SongDisplayFromOptions} from "./SongDisplay/SongDisplay";
-import { createPlaylist, spotifyCachedAuth, SpotifyToken } from 'gcs-util';
+import { createPlaylist, localStorageKey, spotifyCachedAuth, SpotifyToken } from 'gcs-util';
 
 interface IProps{}
 interface IState{
@@ -14,7 +14,8 @@ interface IState{
 		medium_term: boolean,
 		long_term: boolean
 	}
-	ids: string[]
+	ids: string[],
+	auth: boolean
 }
 
 export default class App extends React.Component<IProps, IState>{
@@ -30,17 +31,23 @@ export default class App extends React.Component<IProps, IState>{
 				medium_term: false,
 				long_term: false
 			},
-			ids: []
+			ids: [],
+			auth: false
 		}
 	}
 
 	componentDidMount(){
-
+		if(localStorage.getItem(localStorageKey)){
+			this.setState({
+				auth: true
+			});
+		}
 	}
 
 	render(){
 		return (
-			<div className="App">
+			this.state.auth
+			? <div className="App">
 				<header>
 					<h1 className="text-gcs-loud mb-0 pt-5 pt-md-0 mt-md-n4 rh1">GCS Spotify</h1>
 					<nav>
@@ -82,7 +89,7 @@ export default class App extends React.Component<IProps, IState>{
 								}}
 							>
 								<div>
-									<img src="spotify.svg" />
+									<img src="./spotify.svg" />
 									<span>Add to Spotify</span>
 								</div>
 							</button>
@@ -99,6 +106,19 @@ export default class App extends React.Component<IProps, IState>{
 					</div>
 				</main>
 			</div>
+			: <div className="noAuth"><button
+				className="btn btn-success"
+				onClick={event => {
+					spotifyCachedAuth().then((auth: SpotifyToken) => {
+						this.setState({auth: true});
+					}).catch(console.error);
+				}}
+			>
+				<div>
+					<img src="./spotify.svg" />
+					<span>Login To Spotify</span>
+				</div>
+			</button></div>
 		);
 	}
 }

@@ -143,6 +143,14 @@ button img{
 	margin-right: 0.5rem;
 }
 
+.noAuth{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 @media (max-width: 767px) {
 	nav{
 		margin-top: 4rem;
